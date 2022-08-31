@@ -14,7 +14,7 @@ model Deliveryman {
   id         String       @id @default(uuid())
   username   String       @unique
   password   String
-  Deliveries Deliveries[]
+  deliveries Deliveries[]
 
   @@map("deliveryman")
 }
@@ -23,19 +23,19 @@ model Clients {
   id         String       @id @default(uuid())
   username   String       @unique
   password   String
-  Deliveries Deliveries[]
+  deliveries Deliveries[]
 
   @@map("clients")
 }
 
 model Deliveries {
-  id             String       @id @default(uuid())
-  client         Clients?     @relation(fields: [id_client], references: [id])
+  id             String      @id @default(uuid())
+  client         Clients?    @relation(fields: [id_client], references: [id])
   id_client      String?
-  id_deliveryman String?
-  deliveryman    Deliveryman? @relation(fields: [id_deliveryman], references: [id])
+  id_deliveryman String
+  deliveryman    Deliveryman @relation(fields: [id_deliveryman], references: [id])
   item_name      String
-  created_at     DateTime     @default(now())
+  created_at     DateTime    @default(now())
   end_at         DateTime?
   clientsId      String?
   deliverymanId  String?
